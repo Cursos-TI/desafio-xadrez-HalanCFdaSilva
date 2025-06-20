@@ -5,45 +5,63 @@ void escreve_linha_e_para(char string[]) {
     printf("%s\n", string);
     sleep(1);
 }
+
+void mover_direita(int numero_repeticoes) {
+    if (numero_repeticoes > 1) {
+        mover_direita(--numero_repeticoes);
+    }
+    escreve_linha_e_para("Direita");
+}
+
+void mover_esquerda(int numero_repeticoes) {
+    if (numero_repeticoes > 1) {
+        mover_esquerda(--numero_repeticoes);
+    }
+    escreve_linha_e_para("Esquerda");
+}
+mover_cima_direita(int numero_repeticoes) {
+    if (numero_repeticoes > 1) {
+        mover_cima_direita(--numero_repeticoes);
+    }
+    for (int i = 1; i > 0;){
+        escreve_linha_e_para("Cima");
+        while (i) {
+            mover_direita(--i);
+        }
+    }
+
+}
+
 void pula_duas_linhas() {
     printf("\n\n");
 }
 
-void mover_torre() {
-    int contador = 0;
+void mover_torre(int numero_repeticoes) {
     escreve_linha_e_para("Movendo a Torre:");
-    for (int contador = 0; contador < 5; contador++) {
-        escreve_linha_e_para("Direita");
-    }
+    mover_direita(numero_repeticoes);
     escreve_linha_e_para("Parando de mover a torre.");
 }
-void mover_bispo() {
-    int contador = 0;
+
+void mover_bispo(int numero_repeticoes) {
     escreve_linha_e_para("Movendo o bispo:");
-    while (contador < 5) {
-        escreve_linha_e_para("Cima");
-        escreve_linha_e_para("Direita");
-        contador++;
-    }
+    mover_cima_direita(numero_repeticoes);
     escreve_linha_e_para("Parando de mover o bispo.");
 }
-void mover_rainha() {
-    int contador = 0;
+
+void mover_rainha(int numero_repeticoes) {
+
     escreve_linha_e_para("Movendo a rainha:");
-    do{
-        escreve_linha_e_para("esquerda");
-        contador++;
-    }while (contador < 5);
+    mover_esquerda(numero_repeticoes);
     escreve_linha_e_para("Parando de mover a rainha.");
 }
 void mover_cavalo() {
-    int contador = 2;
+
     escreve_linha_e_para("Movendo o cavalo:");
-    do {
-        for (; contador > 0; contador--)
-            escreve_linha_e_para("Baixo");
-        escreve_linha_e_para("esquerda");
-    }while (contador);
+    for (int i = 2, j=0; i > 0; i--,j++) {
+        escreve_linha_e_para("Cima");
+        if (i == j)
+            mover_direita(0);
+    }
     escreve_linha_e_para("Parando de mover cavalo.");
 
 }
@@ -54,13 +72,13 @@ int main(void) {
     pula_duas_linhas();
     sleep(2);
 
-    mover_torre();
+    mover_torre(5);
     printf("\n");
 
-    mover_bispo();
+    mover_bispo(5);
     printf("\n");
 
-    mover_rainha();
+    mover_rainha(8);
     printf("\n");
 
     mover_cavalo();
@@ -68,7 +86,7 @@ int main(void) {
 
     sleep(2);
     escreve_linha_e_para("              FIM DO JOGO!");
-    escreve_linha_e_para("Foi divertido joga lo com voce.\n Espero te ver novamente.");
+    escreve_linha_e_para("Foi divertido joga lo com voce.\nEspero te ver novamente.");
 
     system("pause");
     return 0;
